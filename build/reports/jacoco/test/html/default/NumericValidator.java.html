@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>NumericValidator.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">NumericValidator</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">NumericValidator.java</span></div><h1>NumericValidator.java</h1><pre class="source lang-java linenums">import javax.swing.*;
+import java.util.regex.Pattern;
+
+
+
+/**
+ * Created by jlarrieux on 5/11/2017.
+ */
+public class NumericValidator {
+
+
+    private TypeOfNumber numericType;
+    private validationType validationType;
+    private JTextField currentTextField;
+<span class="fc" id="L15">    private StringBuilder errorString= new StringBuilder();</span>
+
+<span class="pc" id="L17">    public  enum TypeOfNumber{</span>
+<span class="fc" id="L18">        DOUBLE, INTEGER</span>
+    }
+
+
+<span class="nc" id="L22">    private enum validationType{</span>
+<span class="nc" id="L23">        JTEXTFIELD, TEXTFIELD</span>
+    }
+
+<span class="fc" id="L26">    public NumericValidator(TypeOfNumber numericType){</span>
+<span class="fc" id="L27">        this.numericType = numericType;</span>
+<span class="fc" id="L28">    }</span>
+
+
+
+    public TypeOfNumber getNumericType() {
+<span class="fc" id="L33">        return numericType;</span>
+    }
+
+
+    public boolean validate(JTextField textField){
+<span class="fc" id="L38">        currentTextField = textField;</span>
+<span class="fc" id="L39">        currentTextField.setBorder(UIManager.getBorder(&quot;TextField.border&quot;));</span>
+<span class="fc" id="L40">        String text = textField.getText();</span>
+<span class="fc bfc" id="L41" title="All 4 branches covered.">        boolean result = lengthValidation(text) &amp;&amp; validateNumber(text);</span>
+
+
+<span class="fc" id="L44">        return result;</span>
+    }
+
+
+    private boolean lengthValidation(String text){
+<span class="fc bfc" id="L49" title="All 2 branches covered.">        boolean result = text.length() !=0;</span>
+<span class="fc bfc" id="L50" title="All 2 branches covered.">        if(!result) errorCompilation(MessagePOJO.NO_TEXT_ERROR);</span>
+<span class="fc" id="L51">        return result;</span>
+    }
+
+
+    private boolean validateNumber(String text){
+<span class="fc bfc" id="L56" title="All 2 branches covered.">        if(numericType == TypeOfNumber.DOUBLE) return isNumericTypeDouble(text);</span>
+<span class="fc" id="L57">        else return isNumericTypeInteger(text);</span>
+    }
+
+    private void errorCompilation(String text){
+<span class="pc bpc" id="L61" title="1 of 2 branches missed.">        if(errorString.toString().length()&gt;0) errorString.append(&quot;\n&quot;);</span>
+<span class="fc" id="L62">        errorString.append(text);</span>
+<span class="fc" id="L63">    }</span>
+
+    private boolean isNumericTypeDouble(String text){
+
+<span class="fc bfc" id="L67" title="All 2 branches covered.">        if (Pattern.matches(&quot;^-?\\d*\\.?\\d*&quot;, text)) return true;</span>
+        else {
+<span class="fc" id="L69">            errorCompilation(MessagePOJO.NOT_DOUBLE);</span>
+<span class="fc" id="L70">            return false;</span>
+        }
+    }
+
+    private boolean isNumericTypeInteger(String text){
+<span class="fc bfc" id="L75" title="All 2 branches covered.">        if (Pattern.matches(&quot;^-?\\d*$&quot;, text)) return true;</span>
+        else {
+<span class="fc" id="L77">            errorCompilation(MessagePOJO.NOT_INT);</span>
+<span class="fc" id="L78">            return false;</span>
+        }
+    }
+
+
+
+    public String getErrorString() {
+<span class="fc" id="L85">        return errorString.toString();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.8.201612092310</span></div></body></html>

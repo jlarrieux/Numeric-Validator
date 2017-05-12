@@ -1,0 +1,39 @@
+import java.awt.*
+
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'jacoco'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled false
+        csv.enabled false
+        html.enabled true
+    }
+
+
+}
+
+
+
+task runTest{
+    dependsOn test, jacocoTestReport
+
+    doLast{
+        File coverageReport = new File("${buildDir}/reports/jacoco/test/html/index.html")
+        Desktop.getDesktop().open(coverageReport)
+    }
+}
+
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile "org.spockframework:spock-core:1.1-groovy-2.4"
+}

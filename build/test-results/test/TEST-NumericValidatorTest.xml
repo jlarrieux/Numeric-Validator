@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="NumericValidatorTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2017-05-12T16:12:31" hostname="OpperationSSD" time="1.285">
+  <properties/>
+  <testcase name="set type of Integer" classname="NumericValidatorTest" time="0.96"/>
+  <testcase name="validate an integer" classname="NumericValidatorTest" time="0.301"/>
+  <testcase name="validate a double" classname="NumericValidatorTest" time="0.01"/>
+  <testcase name="get the correct error when not an Int" classname="NumericValidatorTest" time="0.008"/>
+  <testcase name="get correct error when not a Double" classname="NumericValidatorTest" time="0.003"/>
+  <testcase name="get correct error when no text" classname="NumericValidatorTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
