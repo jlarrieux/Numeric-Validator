@@ -1,4 +1,12 @@
+package com.github.jlarrieux.main;
+
+
+
+import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+
 import javax.swing.*;
+import java.awt.*;
 import java.util.regex.Pattern;
 
 
@@ -9,10 +17,15 @@ import java.util.regex.Pattern;
 public class NumericValidator {
 
 
+    public static final String ERROR = "error";
     private TypeOfNumber numericType;
-    private validationType validationType;
+    private validationType vType;
     private JTextField currentTextField;
     private StringBuilder errorString= new StringBuilder();
+    private TextField textField;
+    public static final String RED_BORDER_CSS = "/RedBorder.css";
+    public boolean allowPopUpOnError=true;
+
 
     public  enum TypeOfNumber{
         DOUBLE, INTEGER
@@ -20,7 +33,7 @@ public class NumericValidator {
 
 
     private enum validationType{
-        JTEXTFIELD, TEXTFIELD
+        SWING, JAVAFX
     }
 
     public NumericValidator(TypeOfNumber numericType){
@@ -34,14 +47,36 @@ public class NumericValidator {
     }
 
 
+
+    public void setAllowPopUpOnError(boolean allowPopUpOnError) {
+        this.allowPopUpOnError = allowPopUpOnError;
+    }
+
+
+
     public boolean validate(JTextField textField){
+        vType = validationType.SWING;
         currentTextField = textField;
+        errorString = new StringBuilder();
         currentTextField.setBorder(UIManager.getBorder("TextField.border"));
         String text = textField.getText();
-        boolean result = lengthValidation(text) && validateNumber(text);
-
+        boolean result= lengthValidation(text) && validateNumber(text);
+        invokeError();
 
         return result;
+    }
+
+    public boolean validate(TextField textField, Stage dialogStage){
+        vType = validationType.JAVAFX;
+        this.textField = textField;
+        errorString = new StringBuilder();
+        dialogStage.getScene().getStylesheets().add(getClass().getResource(RED_BORDER_CSS).toExternalForm());
+        this.textField.getStyleClass().remove(ERROR);
+        String text = textField.getText();
+        boolean result = lengthValidation(text) && validateNumber(text);
+        invokeError();
+        return result;
+
     }
 
 
@@ -77,6 +112,34 @@ public class NumericValidator {
             errorCompilation(MessagePOJO.NOT_INT);
             return false;
         }
+    }
+
+    private void invokeError(){
+        if(errorString.toString().length()>0){
+            if(vType== validationType.JAVAFX) javaFxError();
+            else if(vType==validationType.SWING)swingError();
+        }
+    }
+
+
+    private void javaFxError(){
+        textField.getStyleClass().add(ERROR);
+        if(allowPopUpOnError) createErrorDialog();
+
+    }
+
+
+
+
+    private void swingError(){
+        currentTextField.setBorder(BorderFactory.createLineBorder(Color.red, 2));
+        if(allowPopUpOnError) createErrorDialog();
+    }
+
+
+
+    private void createErrorDialog() {
+        JOptionPane.showMessageDialog(null,errorString.toString(),"Error",JOptionPane.ERROR_MESSAGE );
     }
 
 
