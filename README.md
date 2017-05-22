@@ -19,20 +19,27 @@ import the project from maven as follow:
 ```
 
 
+
+
+
 # Example
 ## Java Swing
 
-```NumericValidator validator = new NumericValidator(NumericValidator.TypeOfNumber.DOUBLE);
-boolean result = validator.validate(textField);```
+```
+NumericValidator validator = new NumericValidator(NumericValidator.TypeOfNumber.DOUBLE);
+boolean result = validator.validate(textField);
+```
 
 
 ## Java FX
 
 For JavaFX, you must add the `RedBorder.css` to your project and call the code as follow
 
-```dialogStage.getScene().getStylesheets().add(getClass().getResource("/css/RedBorder.css").toExternalForm());
+```
+dialogStage.getScene().getStylesheets().add(getClass().getResource("/css/RedBorder.css").toExternalForm());
 NumericValidator val = new NumericValidator(NumericValidator.TypeOfNumber.INTEGER);
-boolean result = validator.validate(textField);```
+boolean result = validator.validate(textField);
+```
 If you don't have the css, it won't highlight the appropriate input in red.
 
         
