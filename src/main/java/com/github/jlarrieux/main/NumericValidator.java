@@ -18,8 +18,8 @@ public class NumericValidator {
 
 
     public static final String ERROR = "error";
-    private TypeOfNumber numericType;
-    private validationType vType;
+    private NumberType numericType;
+    private ComponentType vType;
     private JTextField currentTextField;
     private StringBuilder errorString= new StringBuilder();
     private TextField textField;
@@ -27,25 +27,25 @@ public class NumericValidator {
     public boolean allowPopUpOnError=true;
 
 
-    public  enum TypeOfNumber{
-        DOUBLE, INTEGER
+    public  enum NumberType {
+        DOUBLE, INTEGER, Plain
     }
 
 
-    private enum validationType{
+    public enum ComponentType {
         SWING, JAVAFX
     }
 
-    public NumericValidator(TypeOfNumber numericType){
+    public NumericValidator(NumberType numericType){
         this.numericType = numericType;
     }
 
 
-    public void setNumericType(TypeOfNumber type){
+    public void setNumericType(NumberType type){
         this.numericType = type;
     }
 
-    public TypeOfNumber getNumericType() {
+    public NumberType getNumericType() {
         return numericType;
     }
 
@@ -58,7 +58,7 @@ public class NumericValidator {
 
 
     public boolean validate(JTextField textField){
-        vType = validationType.SWING;
+        vType = ComponentType.SWING;
         currentTextField = textField;
         errorString = new StringBuilder();
         currentTextField.setBorder(UIManager.getBorder("TextField.border"));
@@ -70,7 +70,7 @@ public class NumericValidator {
     }
 
     public boolean validate(TextField textField, Stage dialogStage){
-        vType = validationType.JAVAFX;
+        vType = ComponentType.JAVAFX;
         this.textField = textField;
         errorString = new StringBuilder();
         dialogStage.getScene().getStylesheets().add(getClass().getResource(RED_BORDER_CSS).toExternalForm());
@@ -91,7 +91,7 @@ public class NumericValidator {
 
 
     private boolean validateNumber(String text){
-        if(numericType == TypeOfNumber.DOUBLE) return isNumericTypeDouble(text);
+        if(numericType == NumberType.DOUBLE) return isNumericTypeDouble(text);
         else return isNumericTypeInteger(text);
     }
 
@@ -119,8 +119,8 @@ public class NumericValidator {
 
     private void invokeError(){
         if(errorString.toString().length()>0){
-            if(vType== validationType.JAVAFX) javaFxError();
-            else if(vType==validationType.SWING)swingError();
+            if(vType== ComponentType.JAVAFX) javaFxError();
+            else if(vType== ComponentType.SWING)swingError();
         }
     }
 

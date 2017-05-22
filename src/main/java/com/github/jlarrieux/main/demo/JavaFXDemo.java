@@ -3,6 +3,7 @@ package com.github.jlarrieux.main.demo;
 
 
 import com.github.jlarrieux.main.NumericValidator;
+import com.github.jlarrieux.main.NumericValidator2;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -12,7 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-import static javafx.event.ActionEvent.*;
+import static javafx.event.ActionEvent.ACTION;
 
 
 
@@ -22,7 +23,7 @@ import static javafx.event.ActionEvent.*;
 public class JavaFXDemo extends Application{
 
     private Stage primaryStage;
-    TextField textField;
+    TextField textField, textField2;
     Button button;
 
     @Override
@@ -40,6 +41,7 @@ public class JavaFXDemo extends Application{
 
     private void Initializer(){
         textField = (TextField) lookUp("#text");
+        textField2 = (TextField) lookUp("#text2");
         button = (Button) lookUp("#validate");
 
         button.addEventHandler(ACTION, event -> handleClick());
@@ -48,9 +50,11 @@ public class JavaFXDemo extends Application{
 
 
     private void handleClick() {
-        NumericValidator validator = new NumericValidator(NumericValidator.TypeOfNumber.DOUBLE);
-        validator.validate(textField,primaryStage);
-        System.out.println(validator.getErrorString());
+//        NumericValidator validator = new NumericValidator(NumericValidator.NumberType.DOUBLE);
+//        validator.validate(textField,primaryStage);
+//        System.out.println(validator.getErrorString());
+        NumericValidator2 validator2 = new NumericValidator2();
+        validator2.validate(textField, NumericValidator.NumberType.DOUBLE, "red");
     }
 
 

@@ -3,11 +3,14 @@ package com.github.jlarrieux.main.demo;
 
 
 import com.github.jlarrieux.main.NumericValidator;
+import com.github.jlarrieux.main.NumericValidator2;
+import com.github.jlarrieux.main.ValidationObject.SwingValidationObject;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 
 
@@ -16,7 +19,8 @@ import java.awt.event.ActionListener;
  */
 public class SwingDemo extends JFrame implements ActionListener {
 
-    JTextField textField;
+    JTextField textField, textField2;
+
     public SwingDemo(){
         InitUI();
     }
@@ -36,7 +40,11 @@ public class SwingDemo extends JFrame implements ActionListener {
         textField = new JTextField();
         textField.setPreferredSize(new Dimension(200,30));
 
+        textField2 = new JTextField();
+        textField2.setPreferredSize(new Dimension(200,30));
+
         panel.add(textField);
+        panel.add(textField2);
 
         JButton button = new JButton("Validate");
         panel.add(button);
@@ -57,7 +65,15 @@ public class SwingDemo extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        NumericValidator validator = new NumericValidator(NumericValidator.TypeOfNumber.DOUBLE);
-        validator.validate(textField);
+//        NumericValidator validator = new NumericValidator(NumericValidator.NumberType.DOUBLE);
+//        validator.validate(textField);
+        NumericValidator2 val2 = new NumericValidator2();
+//        val2.validate(textField, NumericValidator.NumberType.DOUBLE,"text");
+        ArrayList<SwingValidationObject> validationObjects = new ArrayList<>();
+
+        validationObjects.add(new SwingValidationObject(textField, "textfield1", NumericValidator.NumberType.DOUBLE));
+        validationObjects.add(new SwingValidationObject(textField2,"textfield2", NumericValidator.NumberType.INTEGER));
+        val2.validate(validationObjects);
+
     }
 }

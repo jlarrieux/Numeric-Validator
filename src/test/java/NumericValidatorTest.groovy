@@ -15,8 +15,8 @@ class NumericValidatorTest extends Specification{
 
 
         where:
-        a<<[NumericValidator.TypeOfNumber.DOUBLE, NumericValidator.TypeOfNumber.INTEGER]
-        b<<[NumericValidator.TypeOfNumber.DOUBLE, NumericValidator.TypeOfNumber.INTEGER]
+        a<<[NumericValidator.NumberType.DOUBLE, NumericValidator.NumberType.INTEGER]
+        b<<[NumericValidator.NumberType.DOUBLE, NumericValidator.NumberType.INTEGER]
 
     }
 }

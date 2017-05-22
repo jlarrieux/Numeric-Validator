@@ -4,10 +4,10 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TextField id="text" layoutX="119.0" layoutY="65.0" />
       <Button id="validate" layoutX="222.0" layoutY="305.0" mnemonicParsing="false" text="Validate" />
+      <TextField id="text2" layoutX="119.0" layoutY="133.0" />
    </children>
 </AnchorPane>

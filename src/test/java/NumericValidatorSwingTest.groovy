@@ -11,7 +11,7 @@ class NumericValidatorSwingTest extends Specification{
     NumericValidator val;
 
     def setup(){
-        val = new NumericValidator(NumericValidator.TypeOfNumber.INTEGER)
+        val = new NumericValidator(NumericValidator.NumberType.INTEGER)
         val.allowPopUpOnError = false;
     }
 
@@ -32,7 +32,7 @@ class NumericValidatorSwingTest extends Specification{
 
     def "validate a double"(){
         given:
-        val.setNumericType(NumericValidator.TypeOfNumber.DOUBLE)
+        val.setNumericType(NumericValidator.NumberType.DOUBLE)
         JTextField textField = new JTextField()
 
 
@@ -66,7 +66,7 @@ class NumericValidatorSwingTest extends Specification{
 
     def "get correct error when not a Double"(){
         given:
-        val.setNumericType(NumericValidator.TypeOfNumber.DOUBLE)
+        val.setNumericType(NumericValidator.NumberType.DOUBLE)
         def b = 'b'
         JTextField textField = new JTextField(b)
 
@@ -81,7 +81,7 @@ class NumericValidatorSwingTest extends Specification{
 
     def "get correct error when no text"(){
         given:
-        val.setNumericType(NumericValidator.TypeOfNumber.DOUBLE)
+        val.setNumericType(NumericValidator.NumberType.DOUBLE)
         JTextField textField = new JTextField()
 
         when:
