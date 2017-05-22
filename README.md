@@ -10,11 +10,13 @@ import the project from maven as follow:
 
 ## Maven
 
-```<dependency>
+```
+<dependency>
    <groupId>com.github.jlarrieux</groupId>
    <artifactId>numeric-validator</artifactId>
    <version>1.0.2</version>
-</dependency>```
+</dependency>
+```
 
 
 # Example
