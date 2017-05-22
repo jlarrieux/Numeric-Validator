@@ -25,7 +25,7 @@ public class Swing extends AbstractComponent {
 
     @Override
     public void reset() {
-        swingTextField.setBorder(UIManager.getBorder("textField.border"));
+        swingTextField.setBorder(UIManager.getBorder("TextField.border"));
     }
 
 
