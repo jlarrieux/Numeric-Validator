@@ -1,12 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="NumericValidatorTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2017-05-12T16:12:31" hostname="OpperationSSD" time="1.285">
+<testsuite name="NumericValidatorTest" tests="1" skipped="0" failures="1" errors="0" timestamp="2017-05-21T20:26:48" hostname="Jeannius-PC" time="0.0">
   <properties/>
-  <testcase name="set type of Integer" classname="NumericValidatorTest" time="0.96"/>
-  <testcase name="validate an integer" classname="NumericValidatorTest" time="0.301"/>
-  <testcase name="validate a double" classname="NumericValidatorTest" time="0.01"/>
-  <testcase name="get the correct error when not an Int" classname="NumericValidatorTest" time="0.008"/>
-  <testcase name="get correct error when not a Double" classname="NumericValidatorTest" time="0.003"/>
-  <testcase name="get correct error when no text" classname="NumericValidatorTest" time="0.002"/>
+  <testcase name="set type of Integer" classname="NumericValidatorTest" time="0.0">
+    <failure message="java.lang.IllegalArgumentException: Method '$spock_feature_0_0prov1([])' can't be called with parameters '[[DOUBLE, INTEGER]]'!" type="java.lang.IllegalArgumentException">java.lang.IllegalArgumentException: Method '$spock_feature_0_0prov1([])' can't be called with parameters '[[DOUBLE, INTEGER]]'!
+	at org.spockframework.util.ReflectionUtil.validateArguments(ReflectionUtil.java:200)
+	at org.spockframework.util.ReflectionUtil.invokeMethod(ReflectionUtil.java:187)
+	at org.spockframework.runtime.model.MethodInfo.invoke(MethodInfo.java:84)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecuter.runTestClass(JUnitTestClassExecuter.java:114)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecuter.execute(JUnitTestClassExecuter.java:57)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassProcessor.processTestClass(JUnitTestClassProcessor.java:66)
+	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.processTestClass(SuiteTestClassProcessor.java:51)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:35)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
+	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:32)
+	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:93)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.processTestClass(TestWorker.java:109)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:35)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
+	at org.gradle.internal.remote.internal.hub.MessageHubBackedObjectConnection$DispatchWrapper.dispatch(MessageHubBackedObjectConnection.java:147)
+	at org.gradle.internal.remote.internal.hub.MessageHubBackedObjectConnection$DispatchWrapper.dispatch(MessageHubBackedObjectConnection.java:129)
+	at org.gradle.internal.remote.internal.hub.MessageHub$Handler.run(MessageHub.java:404)
+	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:63)
+	at org.gradle.internal.concurrent.StoppableExecutorImpl$1.run(StoppableExecutorImpl.java:46)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:748)
+</failure>
+  </testcase>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

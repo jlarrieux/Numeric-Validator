@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="NumericValidatorSwingTest" tests="5" skipped="0" failures="5" errors="0" timestamp="2017-05-21T20:26:42" hostname="Jeannius-PC" time="5.776">
+  <properties/>
+  <testcase name="validate an integer" classname="NumericValidatorSwingTest" time="0.001">
+    <failure message="java.lang.IllegalArgumentException: Method '$spock_feature_0_0prov1([])' can't be called with parameters '[[1, 2.0, a, null, -1]]'!" type="java.lang.IllegalArgumentException">java.lang.IllegalArgumentException: Method '$spock_feature_0_0prov1([])' can't be called with parameters '[[1, 2.0, a, null, -1]]'!
+	at org.spockframework.util.ReflectionUtil.validateArguments(ReflectionUtil.java:200)
+	at org.spockframework.util.ReflectionUtil.invokeMethod(ReflectionUtil.java:187)
+	at org.spockframework.runtime.model.MethodInfo.invoke(MethodInfo.java:84)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecuter.runTestClass(JUnitTestClassExecuter.java:114)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecuter.execute(JUnitTestClassExecuter.java:57)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassProcessor.processTestClass(JUnitTestClassProcessor.java:66)
+	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.processTestClass(SuiteTestClassProcessor.java:51)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:35)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
+	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:32)
+	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:93)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.processTestClass(TestWorker.java:109)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:35)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
+	at org.gradle.internal.remote.internal.hub.MessageHubBackedObjectConnection$DispatchWrapper.dispatch(MessageHubBackedObjectConnection.java:147)
+	at org.gradle.internal.remote.internal.hub.MessageHubBackedObjectConnection$DispatchWrapper.dispatch(MessageHubBackedObjectConnection.java:129)
+	at org.gradle.internal.remote.internal.hub.MessageHub$Handler.run(MessageHub.java:404)
+	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:63)
+	at org.gradle.internal.concurrent.StoppableExecutorImpl$1.run(StoppableExecutorImpl.java:46)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:748)
+</failure>
+  </testcase>
+  <testcase name="validate a double" classname="NumericValidatorSwingTest" time="0.001">
+    <failure message="java.lang.IllegalArgumentException: Method '$spock_feature_0_1prov1([])' can't be called with parameters '[[1, 2.0, a, null, -1]]'!" type="java.lang.IllegalArgumentException">java.lang.IllegalArgumentException: Method '$spock_feature_0_1prov1([])' can't be called with parameters '[[1, 2.0, a, null, -1]]'!
+	at org.spockframework.util.ReflectionUtil.validateArguments(ReflectionUtil.java:200)
+	at org.spockframework.util.ReflectionUtil.invokeMethod(ReflectionUtil.java:187)
+	at org.spockframework.runtime.model.MethodInfo.invoke(MethodInfo.java:84)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecuter.runTestClass(JUnitTestClassExecuter.java:114)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecuter.execute(JUnitTestClassExecuter.java:57)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassProcessor.processTestClass(JUnitTestClassProcessor.java:66)
+	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.processTestClass(SuiteTestClassProcessor.java:51)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:35)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
+	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:32)
+	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:93)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.processTestClass(TestWorker.java:109)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:35)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
+	at org.gradle.internal.remote.internal.hub.MessageHubBackedObjectConnection$DispatchWrapper.dispatch(MessageHubBackedObjectConnection.java:147)
+	at org.gradle.internal.remote.internal.hub.MessageHubBackedObjectConnection$DispatchWrapper.dispatch(MessageHubBackedObjectConnection.java:129)
+	at org.gradle.internal.remote.internal.hub.MessageHub$Handler.run(MessageHub.java:404)
+	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:63)
+	at org.gradle.internal.concurrent.StoppableExecutorImpl$1.run(StoppableExecutorImpl.java:46)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:748)
+</failure>
+  </testcase>
+  <testcase name="get the correct error when not an Int" classname="NumericValidatorSwingTest" time="2.27">
+    <failure message="java.lang.IllegalStateException: can not found call #0 on stack. Invalid call of record method?" type="java.lang.IllegalStateException">java.lang.IllegalStateException: can not found call #0 on stack. Invalid call of record method?
+	at NumericValidatorSwingTest.get the correct error when not an Int(NumericValidatorSwingTest.groovy:59)
+</failure>
+  </testcase>
+  <testcase name="get correct error when not a Double" classname="NumericValidatorSwingTest" time="2.273">
+    <failure message="java.lang.IllegalStateException: can not found call #0 on stack. Invalid call of record method?" type="java.lang.IllegalStateException">java.lang.IllegalStateException: can not found call #0 on stack. Invalid call of record method?
+	at NumericValidatorSwingTest.get correct error when not a Double(NumericValidatorSwingTest.groovy:76)
+</failure>
+  </testcase>
+  <testcase name="get correct error when no text" classname="NumericValidatorSwingTest" time="1.231">
+    <failure message="java.lang.IllegalStateException: can not found call #0 on stack. Invalid call of record method?" type="java.lang.IllegalStateException">java.lang.IllegalStateException: can not found call #0 on stack. Invalid call of record method?
+	at NumericValidatorSwingTest.get correct error when no text(NumericValidatorSwingTest.groovy:90)
+</failure>
+  </testcase>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

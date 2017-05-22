@@ -41,6 +41,9 @@ public class NumericValidator {
     }
 
 
+    public void setNumericType(TypeOfNumber type){
+        this.numericType = type;
+    }
 
     public TypeOfNumber getNumericType() {
         return numericType;

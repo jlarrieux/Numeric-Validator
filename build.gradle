@@ -1,39 +1,92 @@
-import java.awt.*
-
-version '1.0-SNAPSHOT'
-
 apply plugin: 'java'
-apply plugin: 'jacoco'
+apply plugin: 'maven'
+apply plugin: 'signing'
 
-sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
 }
 
-jacocoTestReport {
-    reports {
-        xml.enabled false
-        csv.enabled false
-        html.enabled true
-    }
 
+group 'com.github.jlarrieux'
+archivesBaseName = "numeric-validator"
+version = '1.0.2'
 
-}
-
-
-
-task runTest{
-    dependsOn test, jacocoTestReport
-
-    doLast{
-        File coverageReport = new File("${buildDir}/reports/jacoco/test/html/index.html")
-        Desktop.getDesktop().open(coverageReport)
-    }
-}
 
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
     testCompile "org.spockframework:spock-core:1.1-groovy-2.4"
+}
+
+
+
+
+
+//task myJavaDoc(type: Javadoc){
+//     "$buildDir/javadoc2"
+//}
+
+task javadocJar(type: Jar, dependsOn: javadoc){
+    classifier = 'javadoc'
+    from javadoc
+}
+//
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives javadocJar, sourcesJar
+}
+
+signing{
+    sign configurations.archives
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer{
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment)}
+
+            repository(url: 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'){
+                authentication(userName: 'mrseanpaul81', password: 'dancehall')
+            }
+            snapshotRepository(url: 'https://oss.sonatype.org/content/repositories/snapshots/') {
+                authentication(userName: 'mrseanpaul81', password: 'dancehall')
+            }
+
+            pom.project {
+                name 'Numeric Validator'
+                packaging 'jar'
+                description 'A library to validate int and double input for JavaFX and Swing text input'
+                url 'https://www.github.com/jlarrieux/Numeric-Validator'
+
+                scm {
+                    connection 'scm:git:git://github.com/jlarrieux/Numeric-Validator'
+                    developerConnection 'scm:git:ssh://github.com:jlarrieux/Numeric-Validator'
+                    url 'http://github.com/jlarrieux/Numeric-Validator/tree/master'
+                }
+
+
+                licenses {
+                    license {
+                        name 'MIT License'
+                        url 'http://www.opensource.org/licenses/mit-license.php'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id 'mrseanpaul81'
+                        name 'Jean-Rodney Larrieux'
+                        email 'jeanrodneylarrieux@gmail.com'
+
+                    }
+                }
+            }
+
+        }
+    }
 }

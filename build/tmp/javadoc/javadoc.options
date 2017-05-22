@@ -1,0 +1,9 @@
+-classpath 'C:\\Users\\Jeannius\\Documents\\IntelliJ Projects\\Java Projects\\JavaNumericValidator\\build\\classes\\main;C:\\Users\\Jeannius\\Documents\\IntelliJ Projects\\Java Projects\\JavaNumericValidator\\build\\resources\\main'
+-d 'C:\\Users\\Jeannius\\Documents\\IntelliJ Projects\\Java Projects\\JavaNumericValidator\\build\\docs\\javadoc'
+-doctitle 'NumericValidator 1.0.2 API'
+-quiet 
+-windowtitle 'NumericValidator 1.0.2 API'
+'C:\\Users\\Jeannius\\Documents\\IntelliJ Projects\\Java Projects\\JavaNumericValidator\\src\\main\\java\\demo\\JavaFXDemo.java'
+'C:\\Users\\Jeannius\\Documents\\IntelliJ Projects\\Java Projects\\JavaNumericValidator\\src\\main\\java\\demo\\SwingDemo.java'
+'C:\\Users\\Jeannius\\Documents\\IntelliJ Projects\\Java Projects\\JavaNumericValidator\\src\\main\\java\\MessagePOJO.java'
+'C:\\Users\\Jeannius\\Documents\\IntelliJ Projects\\Java Projects\\JavaNumericValidator\\src\\main\\java\\NumericValidator.java'
