@@ -10,23 +10,17 @@ repositories {
 
 group 'com.github.jlarrieux'
 archivesBaseName = "numeric-validator"
-version = '1.0.2'
+version = '1.1-rc'
 
 
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
     testCompile "org.spockframework:spock-core:1.1-groovy-2.4"
-    compile 'com.google.guava:guava:21.+'
+    compile 'com.google.guava:guava:21.0'
 }
 
 
-
-
-
-//task myJavaDoc(type: Javadoc){
-//     "$buildDir/javadoc2"
-//}
 
 task javadocJar(type: Jar, dependsOn: javadoc){
     classifier = 'javadoc'

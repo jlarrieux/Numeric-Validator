@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.github.jlarrieux</groupId>
   <artifactId>numeric-validator</artifactId>
-  <version>1.0.2</version>
+  <version>1.1-rc</version>
   <name>Numeric Validator</name>
   <description>A library to validate int and double input for JavaFX and Swing text input</description>
   <url>https://www.github.com/jlarrieux/Numeric-Validator</url>
@@ -27,6 +27,12 @@
     <url>http://github.com/jlarrieux/Numeric-Validator/tree/master</url>
   </scm>
   <dependencies>
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>21.+</version>
+      <scope>compile</scope>
+    </dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>

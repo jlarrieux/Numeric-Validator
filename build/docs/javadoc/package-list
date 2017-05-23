@@ -1,2 +1,6 @@
 com.github.jlarrieux.main
+com.github.jlarrieux.main.ValidationObject
+com.github.jlarrieux.main.Validators
+com.github.jlarrieux.main.components
 com.github.jlarrieux.main.demo
+com.github.jlarrieux.main.factory
