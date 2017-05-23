@@ -1,4 +1,3 @@
-import com.github.jlarrieux.main.MessagePOJO
 import com.github.jlarrieux.main.NumericValidator
 import spock.lang.Specification
 
@@ -11,8 +10,8 @@ class NumericValidatorSwingTest extends Specification{
     NumericValidator val;
 
     def setup(){
-        val = new NumericValidator(NumericValidator.NumberType.INTEGER)
-        val.allowPopUpOnError = false;
+        val = new NumericValidator()
+        val.setAllowPopUp( false);
     }
 
     def "validate an integer"(){
@@ -22,7 +21,7 @@ class NumericValidatorSwingTest extends Specification{
 
         expect:
         textField.setText(String.valueOf(a))
-        b == val.validate(textField)
+        b == val.validate(textField, NumericValidator.NumberType.INTEGER, "B")
 
         where:
         a <<[1,2.0,'a',null,-1]
@@ -32,13 +31,13 @@ class NumericValidatorSwingTest extends Specification{
 
     def "validate a double"(){
         given:
-        val.setNumericType(NumericValidator.NumberType.DOUBLE)
+
         JTextField textField = new JTextField()
 
 
         expect:
         textField.setText(String.valueOf(a))
-        b== val.validate(textField)
+        b== val.validate(textField, NumericValidator.NumberType.DOUBLE, "a")
 
         where:
         a <<[1,2.0,'a',null,-1]
@@ -46,50 +45,8 @@ class NumericValidatorSwingTest extends Specification{
     }
 
 
-    def "get the correct error when not an Int"(){
-        given:
-        def a = 'a'
-        JTextField textField = new JTextField(a)
 
 
-        when:
-        val.validate(textField)
-
-
-        then:
-        val.getErrorString() == MessagePOJO.NOT_INT
-
-    }
-
-
-
-
-    def "get correct error when not a Double"(){
-        given:
-        val.setNumericType(NumericValidator.NumberType.DOUBLE)
-        def b = 'b'
-        JTextField textField = new JTextField(b)
-
-        when:
-        val.validate(textField)
-
-        then:
-        val.getErrorString()==MessagePOJO.NOT_DOUBLE
-    }
-
-
-
-    def "get correct error when no text"(){
-        given:
-        val.setNumericType(NumericValidator.NumberType.DOUBLE)
-        JTextField textField = new JTextField()
-
-        when:
-        val.validate(textField)
-
-        then:
-        val.getErrorString()==MessagePOJO.NO_TEXT_ERROR
-    }
 
 
 

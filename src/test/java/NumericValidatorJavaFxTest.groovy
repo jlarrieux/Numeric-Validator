@@ -10,7 +10,7 @@ class NumericValidatorJavaFxTest extends Specification{
 
     def setup(){
         val = new NumericValidator(NumericValidator.NumberType.INTEGER)
-        val.allowPopUpOnError = false;
+        val.setAllowPopUp(false);
     }
 
 //    def "validate an integer"(){

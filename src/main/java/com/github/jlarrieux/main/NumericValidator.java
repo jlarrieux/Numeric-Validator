@@ -2,30 +2,33 @@ package com.github.jlarrieux.main;
 
 
 
+import com.github.jlarrieux.main.ValidationObject.AbstractComponentValidationObject;
+import com.github.jlarrieux.main.ValidationObject.JavaFXValidationObject;
+import com.github.jlarrieux.main.ValidationObject.SwingValidationObject;
+import com.github.jlarrieux.main.ValidationObject.ValidationObject;
+import com.github.jlarrieux.main.Validators.AbstractValidator;
+import com.github.jlarrieux.main.components.JavaFX;
+import com.github.jlarrieux.main.components.Swing;
+import com.github.jlarrieux.main.factory.AbstractFactory;
+import com.github.jlarrieux.main.factory.FactoryProducer;
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.Multimap;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 import javax.swing.*;
-import java.awt.*;
-import java.util.regex.Pattern;
+import java.util.ArrayList;
 
 
 
 /**
- * Created by jlarrieux on 5/11/2017.
+ * Created by jlarrieux on 5/22/2017.
  */
 public class NumericValidator {
 
-
-    public static final String ERROR = "error";
-    private NumberType numericType;
-    private ComponentType vType;
-    private JTextField currentTextField;
-    private StringBuilder errorString= new StringBuilder();
-    private TextField textField;
-    public static final String RED_BORDER_CSS = "/RedBorder.css";
-    public boolean allowPopUpOnError=true;
-
+    private  AbstractFactory componentFactory = FactoryProducer.getFactory(FactoryProducer.FactoryType.COMPONENT);
+    private  AbstractFactory validatorFactory = FactoryProducer.getFactory(FactoryProducer.FactoryType.VALIDATOR);
+    private Multimap<String, String> errorList = ArrayListMultimap.create();
+    private boolean allowPopUp = true;
 
     public  enum NumberType {
         DOUBLE, INTEGER, Plain
@@ -36,118 +39,103 @@ public class NumericValidator {
         SWING, JAVAFX
     }
 
-    public NumericValidator(NumberType numericType){
-        this.numericType = numericType;
+
+    public boolean validate(JTextField textField, NumericValidator.NumberType type, String componentName){
+
+        Swing swing = (Swing)  componentFactory.getComponent(ComponentType.SWING);
+        swing.setTextField(textField);
+        ValidationObject object = new ValidationObject(swing,(AbstractValidator) validatorFactory.getValidator(type));
+        boolean result = object.validate();
+        interpretResult(componentName, object.getError(), result);
+        return object.validate();
+
     }
 
 
-    public void setNumericType(NumberType type){
-        this.numericType = type;
-    }
+    public boolean validate(TextField textField, NumericValidator.NumberType type, String componentName){
 
-    public NumberType getNumericType() {
-        return numericType;
-    }
-
-
-
-    public void setAllowPopUpOnError(boolean allowPopUpOnError) {
-        this.allowPopUpOnError = allowPopUpOnError;
-    }
-
-
-
-    public boolean validate(JTextField textField){
-        vType = ComponentType.SWING;
-        currentTextField = textField;
-        errorString = new StringBuilder();
-        currentTextField.setBorder(UIManager.getBorder("TextField.border"));
-        String text = textField.getText();
-        boolean result= lengthValidation(text) && validateNumber(text);
-        invokeError();
+        JavaFX fx = (JavaFX) componentFactory.getComponent(NumericValidator.ComponentType.JAVAFX);
+        fx.setTextField(textField);
+        ValidationObject object = new ValidationObject(fx,(AbstractValidator) validatorFactory.getValidator(type));
+        boolean result = object.validate();
+        interpretResult(componentName, object.getError(), result);
 
         return result;
     }
 
-    public boolean validate(TextField textField, Stage dialogStage){
-        vType = ComponentType.JAVAFX;
-        this.textField = textField;
-        errorString = new StringBuilder();
-        dialogStage.getScene().getStylesheets().add(getClass().getResource(RED_BORDER_CSS).toExternalForm());
-        this.textField.getStyleClass().remove(ERROR);
-        String text = textField.getText();
-        boolean result = lengthValidation(text) && validateNumber(text);
-        invokeError();
-        return result;
-
-    }
 
 
-    private boolean lengthValidation(String text){
-        boolean result = text.length() !=0;
-        if(!result) errorCompilation(MessagePOJO.NO_TEXT_ERROR);
-        return result;
-    }
-
-
-    private boolean validateNumber(String text){
-        if(numericType == NumberType.DOUBLE) return isNumericTypeDouble(text);
-        else return isNumericTypeInteger(text);
-    }
-
-    private void errorCompilation(String text){
-        if(errorString.toString().length()>0) errorString.append("\n");
-        errorString.append(text);
-    }
-
-    private boolean isNumericTypeDouble(String text){
-
-        if (Pattern.matches("^-?\\d*\\.?\\d*", text)) return true;
-        else {
-            errorCompilation(MessagePOJO.NOT_DOUBLE);
-            return false;
-        }
-    }
-
-    private boolean isNumericTypeInteger(String text){
-        if (Pattern.matches("^-?\\d*$", text)) return true;
-        else {
-            errorCompilation(MessagePOJO.NOT_INT);
-            return false;
-        }
-    }
-
-    private void invokeError(){
-        if(errorString.toString().length()>0){
-            if(vType== ComponentType.JAVAFX) javaFxError();
-            else if(vType== ComponentType.SWING)swingError();
+    private void interpretResult(String componentName, String error, boolean result) {
+        if(!result){
+            errorList.put(componentName, error);
+            if(allowPopUp) createErrorDialog();
         }
     }
 
 
-    private void javaFxError(){
-        textField.getStyleClass().add(ERROR);
-        if(allowPopUpOnError) createErrorDialog();
+
+    public boolean validate(SwingValidationObject swingValidationObject){
+        return validate(swingValidationObject.getTextField(),swingValidationObject.getType(),swingValidationObject.getName());
+
+    }
+
+    public boolean validate(JavaFXValidationObject javaFXValidationObject){
+        return validate(javaFXValidationObject.getTextField(),javaFXValidationObject.getType(),javaFXValidationObject.getName());
+    }
+
+
+    public boolean validate(ArrayList<AbstractComponentValidationObject> swingList){
+        setAllowPopUp(false);
+        int i=0;
+        boolean  result = false;
+        for(AbstractComponentValidationObject validationObject: swingList){
+            if(validationObject instanceof JavaFXValidationObject) result = validate((JavaFXValidationObject)validationObject);
+            else if(validationObject instanceof SwingValidationObject) result = validate((SwingValidationObject) validationObject);
+
+            if(!result) i++;
+        }
+
+
+        setAllowPopUp(true);
+        if(i>0) createErrorDialog();
+        return i>0;
 
     }
 
 
 
 
-    private void swingError(){
-        currentTextField.setBorder(BorderFactory.createLineBorder(Color.red, 2));
-        if(allowPopUpOnError) createErrorDialog();
+    public void setAllowPopUp(boolean allowPopUp) {
+        this.allowPopUp = allowPopUp;
     }
+
+
+
+
+
+    private String generateErrorList(){
+        StringBuffer buffer = new StringBuffer();
+
+        for(String k: errorList.keySet()){
+            if(buffer.toString().length()>0) buffer.append("\n\n\n");
+            buffer.append(k+":\n");
+            for(String s: errorList.get(k)) buffer.append("   -"+s+"\n");
+        }
+
+
+        return buffer.toString();
+    }
+
 
 
 
     private void createErrorDialog() {
-        JOptionPane.showMessageDialog(null,errorString.toString(),"Error",JOptionPane.ERROR_MESSAGE );
+
+        JOptionPane.showMessageDialog(null,generateErrorList(),"Error",JOptionPane.ERROR_MESSAGE );
     }
 
 
 
-    public String getErrorString() {
-        return errorString.toString();
-    }
+
+
 }
