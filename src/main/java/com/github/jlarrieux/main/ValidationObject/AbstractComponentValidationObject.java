@@ -2,6 +2,7 @@ package com.github.jlarrieux.main.ValidationObject;
 
 
 
+import com.github.jlarrieux.main.Constraints.AbstractContraint;
 import com.github.jlarrieux.main.NumericValidator;
 
 
@@ -13,6 +14,8 @@ public class AbstractComponentValidationObject {
 
     private String name;
     private NumericValidator.NumberType type;
+    AbstractContraint greaterThan;
+    AbstractContraint lessThan;
 
 
 
@@ -36,5 +39,29 @@ public class AbstractComponentValidationObject {
 
     protected void setType(NumericValidator.NumberType type) {
         this.type = type;
+    }
+
+
+
+    public AbstractContraint getGreaterThan() {
+        return greaterThan;
+    }
+
+
+
+    public void setGreaterThan(AbstractContraint greaterThan) {
+        this.greaterThan = greaterThan;
+    }
+
+
+
+    public AbstractContraint getLessThan() {
+        return lessThan;
+    }
+
+
+
+    public void setLessThan(AbstractContraint lessThan) {
+        this.lessThan = lessThan;
     }
 }
