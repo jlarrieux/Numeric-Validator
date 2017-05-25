@@ -13,6 +13,7 @@ import com.github.jlarrieux.main.factory.AbstractFactory;
 import com.github.jlarrieux.main.factory.FactoryProducer;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 
 import javax.swing.*;
@@ -29,6 +30,7 @@ public class NumericValidator {
     private  AbstractFactory validatorFactory = FactoryProducer.getFactory(FactoryProducer.FactoryType.VALIDATOR);
     private Multimap<String, String> errorList = ArrayListMultimap.create();
     private boolean allowPopUp = true;
+    private ComponentType componentType;
 
     public  enum NumberType {
         DOUBLE, INTEGER, Plain
@@ -40,9 +42,9 @@ public class NumericValidator {
     }
 
 
-    public boolean validate(JTextField textField, NumericValidator.NumberType type, String componentName){
-
-        Swing swing = (Swing)  componentFactory.getComponent(ComponentType.SWING);
+    public boolean validate(JTextField textField, String componentName, NumberType type){
+        componentType  = ComponentType.SWING;
+        Swing swing = (Swing)  componentFactory.getComponent(componentType);
         swing.setTextField(textField);
         ValidationObject object = new ValidationObject(swing,(AbstractValidator) validatorFactory.getValidator(type));
         boolean result = object.validate();
@@ -52,9 +54,9 @@ public class NumericValidator {
     }
 
 
-    public boolean validate(TextField textField, NumericValidator.NumberType type, String componentName){
-
-        JavaFX fx = (JavaFX) componentFactory.getComponent(NumericValidator.ComponentType.JAVAFX);
+    public boolean validate(TextField textField, String componentName, NumberType type){
+        componentType  = ComponentType.JAVAFX;
+        JavaFX fx = (JavaFX) componentFactory.getComponent(componentType);
         fx.setTextField(textField);
         ValidationObject object = new ValidationObject(fx,(AbstractValidator) validatorFactory.getValidator(type));
         boolean result = object.validate();
@@ -75,12 +77,12 @@ public class NumericValidator {
 
 
     public boolean validate(SwingValidationObject swingValidationObject){
-        return validate(swingValidationObject.getTextField(),swingValidationObject.getType(),swingValidationObject.getName());
+        return validate(swingValidationObject.getTextField(), swingValidationObject.getName(), swingValidationObject.getType());
 
     }
 
     public boolean validate(JavaFXValidationObject javaFXValidationObject){
-        return validate(javaFXValidationObject.getTextField(),javaFXValidationObject.getType(),javaFXValidationObject.getName());
+        return validate(javaFXValidationObject.getTextField(), javaFXValidationObject.getName(), javaFXValidationObject.getType());
     }
 
 
@@ -131,11 +133,18 @@ public class NumericValidator {
 
     private void createErrorDialog() {
 
-        JOptionPane.showMessageDialog(null,generateErrorList(),"Error",JOptionPane.ERROR_MESSAGE );
+        if(componentType==ComponentType.SWING) JOptionPane.showMessageDialog(null,generateErrorList(),"Error",JOptionPane.ERROR_MESSAGE );
+        else if(componentType==ComponentType.JAVAFX) javaFXalert().showAndWait();
     }
 
 
-
+    private Alert javaFXalert(){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Invalid Input");
+        alert.setHeaderText("Please correct the following error(s)");
+        alert.setContentText(generateErrorList());
+        return alert;
+    }
 
 
 }
