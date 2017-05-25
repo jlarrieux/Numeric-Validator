@@ -21,7 +21,7 @@ class NumericValidatorSwingTest extends Specification{
 
         expect:
         textField.setText(String.valueOf(a))
-        b == val.validate(textField, "B", NumericValidator.NumberType.INTEGER)
+        b == val.isValid(textField, "B", NumericValidator.NumberType.INTEGER)
 
         where:
         a <<[1,2.0,'a',null,-1]
@@ -37,7 +37,7 @@ class NumericValidatorSwingTest extends Specification{
 
         expect:
         textField.setText(String.valueOf(a))
-        b== val.validate(textField, "a", NumericValidator.NumberType.DOUBLE)
+        b== val.isValid(textField, "a", NumericValidator.NumberType.DOUBLE)
 
         where:
         a <<[1,2.0,'a',null,-1]

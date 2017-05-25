@@ -9,7 +9,7 @@ public class PlainValidator extends AbstractValidator {
 
 
     @Override
-    public boolean validate(String text) {
+    public boolean isValid(String text) {
         return isNotEmpty(text);
     }
 

@@ -42,24 +42,24 @@ public class NumericValidator {
     }
 
 
-    public boolean validate(JTextField textField, String componentName, NumberType type){
+    public boolean isValid(JTextField textField, String componentName, NumberType type){
         componentType  = ComponentType.SWING;
         Swing swing = (Swing)  componentFactory.getComponent(componentType);
         swing.setTextField(textField);
         ValidationObject object = new ValidationObject(swing,(AbstractValidator) validatorFactory.getValidator(type));
-        boolean result = object.validate();
+        boolean result = object.isValid();
         interpretResult(componentName, object.getError(), result);
-        return object.validate();
+        return result;
 
     }
 
 
-    public boolean validate(TextField textField, String componentName, NumberType type){
+    public boolean isValid(TextField textField, String componentName, NumberType type){
         componentType  = ComponentType.JAVAFX;
         JavaFX fx = (JavaFX) componentFactory.getComponent(componentType);
         fx.setTextField(textField);
         ValidationObject object = new ValidationObject(fx,(AbstractValidator) validatorFactory.getValidator(type));
-        boolean result = object.validate();
+        boolean result = object.isValid();
         interpretResult(componentName, object.getError(), result);
 
         return result;
@@ -76,23 +76,25 @@ public class NumericValidator {
 
 
 
-    public boolean validate(SwingValidationObject swingValidationObject){
-        return validate(swingValidationObject.getTextField(), swingValidationObject.getName(), swingValidationObject.getType());
+    public boolean isValid(SwingValidationObject swingValidationObject){
+        boolean result = isValid(swingValidationObject.getTextField(), swingValidationObject.getName(), swingValidationObject.getType());
+
+        return result;
 
     }
 
-    public boolean validate(JavaFXValidationObject javaFXValidationObject){
-        return validate(javaFXValidationObject.getTextField(), javaFXValidationObject.getName(), javaFXValidationObject.getType());
+    public boolean isValid(JavaFXValidationObject javaFXValidationObject){
+        return isValid(javaFXValidationObject.getTextField(), javaFXValidationObject.getName(), javaFXValidationObject.getType());
     }
 
 
-    public boolean validate(ArrayList<AbstractComponentValidationObject> swingList){
+    public boolean isValid(ArrayList<AbstractComponentValidationObject> swingList){
         setAllowPopUp(false);
         int i=0;
         boolean  result = false;
         for(AbstractComponentValidationObject validationObject: swingList){
-            if(validationObject instanceof JavaFXValidationObject) result = validate((JavaFXValidationObject)validationObject);
-            else if(validationObject instanceof SwingValidationObject) result = validate((SwingValidationObject) validationObject);
+            if(validationObject instanceof JavaFXValidationObject) result = isValid((JavaFXValidationObject)validationObject);
+            else if(validationObject instanceof SwingValidationObject) result = isValid((SwingValidationObject) validationObject);
 
             if(!result) i++;
         }

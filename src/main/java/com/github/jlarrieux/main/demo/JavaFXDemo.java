@@ -54,15 +54,16 @@ public class JavaFXDemo extends Application{
 
     private void handleClick() {
 //        NumericValidator validator = new NumericValidator(NumericValidator.NumberType.DOUBLE);
-//        validator.validate(textField,primaryStage);
+//        validator.isValid(textField,primaryStage);
 //        System.out.println(validator.getErrorString());
         NumericValidator validator2 = new NumericValidator();
-//        validator2.validate(textField, NumericValidator.NumberType.DOUBLE, "red");
+//        validator2.isValid(textField, NumericValidator.NumberType.DOUBLE, "red");
 
         ArrayList<AbstractComponentValidationObject> list = new ArrayList<>();
         list.add(new JavaFXValidationObject(textField,"text1", NumericValidator.NumberType.DOUBLE));
         list.add(new JavaFXValidationObject(textField2, "text2", NumericValidator.NumberType.INTEGER));
-        validator2.validate(list);
+        boolean result=validator2.isValid(list);
+        System.out.print(result);
     }
 
 
