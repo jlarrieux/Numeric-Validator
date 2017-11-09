@@ -21,7 +21,11 @@ class ValidatorSwingTest extends Specification{
 
         expect:
         textField.setText(String.valueOf(a))
+<<<<<<< HEAD:src/test/java/ValidatorSwingTest.groovy
         b == val.validate(textField, Validator.NumberType.INTEGER, "B")
+=======
+        b == val.isValid(textField, "B", NumericValidator.NumberType.INTEGER)
+>>>>>>> 90703b37038f73e3e0a566cff0abb31aaab02433:src/test/java/NumericValidatorSwingTest.groovy
 
         where:
         a <<[1,2.0,'a',null,-1]
@@ -37,7 +41,11 @@ class ValidatorSwingTest extends Specification{
 
         expect:
         textField.setText(String.valueOf(a))
+<<<<<<< HEAD:src/test/java/ValidatorSwingTest.groovy
         b== val.validate(textField, Validator.NumberType.DOUBLE, "a")
+=======
+        b== val.isValid(textField, "a", NumericValidator.NumberType.DOUBLE)
+>>>>>>> 90703b37038f73e3e0a566cff0abb31aaab02433:src/test/java/NumericValidatorSwingTest.groovy
 
         where:
         a <<[1,2.0,'a',null,-1]

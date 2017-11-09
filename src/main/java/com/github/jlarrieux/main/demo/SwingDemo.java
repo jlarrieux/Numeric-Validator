@@ -65,6 +65,7 @@ public class SwingDemo extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+<<<<<<< HEAD
 //        Validator validator = new Validator(Validator.NumberType.DOUBLE);
 //        validator.validate(textField);
 
@@ -76,6 +77,19 @@ public class SwingDemo extends JFrame implements ActionListener {
         validationObjects.add(new SwingValidationObject(textField, "textfield1", Validator.NumberType.DOUBLE));
         validationObjects.add(new SwingValidationObject(textField2,"textfield2", Validator.NumberType.INTEGER));
         val2.validate(validationObjects);
+=======
+//        NumericValidator validator = new NumericValidator(NumericValidator.NumberType.DOUBLE);
+//        validator.isValid(textField);
+
+
+        NumericValidator val2 = new NumericValidator();
+//        val2.isValid(textField, NumericValidator.NumberType.DOUBLE,"text");
+        ArrayList<AbstractComponentValidationObject> validationObjects = new ArrayList<>();
+
+        validationObjects.add(new SwingValidationObject(textField, "textfield1", NumericValidator.NumberType.DOUBLE));
+        validationObjects.add(new SwingValidationObject(textField2,"textfield2", NumericValidator.NumberType.INTEGER));
+        val2.isValid(validationObjects);
+>>>>>>> 90703b37038f73e3e0a566cff0abb31aaab02433
 
     }
 }

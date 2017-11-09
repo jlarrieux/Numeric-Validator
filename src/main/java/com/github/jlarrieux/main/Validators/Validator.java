@@ -8,7 +8,7 @@ package com.github.jlarrieux.main.Validators;
 public interface Validator {
 
 
-    boolean validate(String text);
+    boolean isValid(String text);
 
 
 

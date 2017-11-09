@@ -13,7 +13,7 @@ class ValidatorJavaFxTest extends Specification{
         val.setAllowPopUp(false);
     }
 
-//    def "validate an integer"(){
+//    def "isValid an integer"(){
 //        given:
 //        TextField textField = new TextField()
 //
@@ -21,7 +21,7 @@ class ValidatorJavaFxTest extends Specification{
 //
 //        expect:
 //        textField.setText(String.valueOf(a))
-//        b == val.validate(textField)
+//        b == val.isValid(textField)
 //
 //        where:
 //        a <<[1,2.0,'a',null,-1]

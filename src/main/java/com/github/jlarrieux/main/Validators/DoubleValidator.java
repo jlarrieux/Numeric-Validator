@@ -13,7 +13,7 @@ public class DoubleValidator extends AbstractValidator {
 
 
     @Override
-    public boolean validate(String text) {
+    public boolean isValid(String text) {
         if(isNotEmpty(text) && numberValidation(text)) return true;
         return false;
     }

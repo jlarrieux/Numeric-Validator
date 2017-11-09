@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ivy-module version="2.0" xmlns:m="http://ant.apache.org/ivy/maven">
-  <info organisation="com.github.jlarrieux" module="NumericValidator" revision="1.1-rc" status="integration" default="true" publication="20170522221025"/>
+  <info organisation="com.github.jlarrieux" module="NumericValidator" revision="1.1-rc" status="integration" default="true" publication="20170522221517"/>
   <configurations>
     <conf name="apiElements" visibility="private" extends="compile,runtime"/>
     <conf name="archives" visibility="public"/>
@@ -31,7 +31,7 @@
     <artifact name="numeric-validator" type="jar.asc" ext="asc" conf="archives,signatures" m:classifier="sources"/>
   </publications>
   <dependencies>
-    <dependency org="com.google.guava" name="guava" rev="21.+" conf="compile-&gt;default"/>
+    <dependency org="com.google.guava" name="guava" rev="21.0" conf="compile-&gt;default"/>
     <dependency org="junit" name="junit" rev="4.12" conf="testCompile-&gt;default"/>
     <dependency org="org.spockframework" name="spock-core" rev="1.1-groovy-2.4" conf="testCompile-&gt;default"/>
   </dependencies>

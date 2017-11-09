@@ -13,6 +13,7 @@ import com.github.jlarrieux.main.factory.AbstractFactory;
 import com.github.jlarrieux.main.factory.FactoryProducer;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 
 import javax.swing.*;
@@ -29,6 +30,7 @@ public class Validator {
     private  AbstractFactory validatorFactory = FactoryProducer.getFactory(FactoryProducer.FactoryType.VALIDATOR);
     private Multimap<String, String> errorList = ArrayListMultimap.create();
     private boolean allowPopUp = true;
+    private ComponentType componentType;
 
     public  enum NumberType {
         DOUBLE, INTEGER, Plain
@@ -40,24 +42,36 @@ public class Validator {
     }
 
 
+<<<<<<< HEAD:src/main/java/com/github/jlarrieux/main/Validator.java
     public boolean validate(JTextField textField, Validator.NumberType type, String componentName, Integer... numberOfCharacter){
 
         Swing swing = (Swing)  componentFactory.getComponent(ComponentType.SWING);
+=======
+    public boolean isValid(JTextField textField, String componentName, NumberType type){
+        componentType  = ComponentType.SWING;
+        Swing swing = (Swing)  componentFactory.getComponent(componentType);
+>>>>>>> 90703b37038f73e3e0a566cff0abb31aaab02433:src/main/java/com/github/jlarrieux/main/NumericValidator.java
         swing.setTextField(textField);
         ValidationObject object = new ValidationObject(swing,(AbstractValidator) validatorFactory.getValidator(type));
-        boolean result = object.validate();
+        boolean result = object.isValid();
         interpretResult(componentName, object.getError(), result);
-        return object.validate();
+        return result;
 
     }
 
 
+<<<<<<< HEAD:src/main/java/com/github/jlarrieux/main/Validator.java
     public boolean validate(TextField textField, Validator.NumberType type, String componentName, Integer... numberOfCharacter){
 
         JavaFX fx = (JavaFX) componentFactory.getComponent(Validator.ComponentType.JAVAFX);
+=======
+    public boolean isValid(TextField textField, String componentName, NumberType type){
+        componentType  = ComponentType.JAVAFX;
+        JavaFX fx = (JavaFX) componentFactory.getComponent(componentType);
+>>>>>>> 90703b37038f73e3e0a566cff0abb31aaab02433:src/main/java/com/github/jlarrieux/main/NumericValidator.java
         fx.setTextField(textField);
         ValidationObject object = new ValidationObject(fx,(AbstractValidator) validatorFactory.getValidator(type));
-        boolean result = object.validate();
+        boolean result = object.isValid();
         interpretResult(componentName, object.getError(), result);
 
         return result;
@@ -74,23 +88,25 @@ public class Validator {
 
 
 
-    public boolean validate(SwingValidationObject swingValidationObject){
-        return validate(swingValidationObject.getTextField(),swingValidationObject.getType(),swingValidationObject.getName());
+    public boolean isValid(SwingValidationObject swingValidationObject){
+        boolean result = isValid(swingValidationObject.getTextField(), swingValidationObject.getName(), swingValidationObject.getType());
+
+        return result;
 
     }
 
-    public boolean validate(JavaFXValidationObject javaFXValidationObject){
-        return validate(javaFXValidationObject.getTextField(),javaFXValidationObject.getType(),javaFXValidationObject.getName());
+    public boolean isValid(JavaFXValidationObject javaFXValidationObject){
+        return isValid(javaFXValidationObject.getTextField(), javaFXValidationObject.getName(), javaFXValidationObject.getType());
     }
 
 
-    public boolean validate(ArrayList<AbstractComponentValidationObject> swingList){
+    public boolean isValid(ArrayList<AbstractComponentValidationObject> swingList){
         setAllowPopUp(false);
         int i=0;
         boolean  result = false;
         for(AbstractComponentValidationObject validationObject: swingList){
-            if(validationObject instanceof JavaFXValidationObject) result = validate((JavaFXValidationObject)validationObject);
-            else if(validationObject instanceof SwingValidationObject) result = validate((SwingValidationObject) validationObject);
+            if(validationObject instanceof JavaFXValidationObject) result = isValid((JavaFXValidationObject)validationObject);
+            else if(validationObject instanceof SwingValidationObject) result = isValid((SwingValidationObject) validationObject);
 
             if(!result) i++;
         }
@@ -131,11 +147,18 @@ public class Validator {
 
     private void createErrorDialog() {
 
-        JOptionPane.showMessageDialog(null,generateErrorList(),"Error",JOptionPane.ERROR_MESSAGE );
+        if(componentType==ComponentType.SWING) JOptionPane.showMessageDialog(null,generateErrorList(),"Error",JOptionPane.ERROR_MESSAGE );
+        else if(componentType==ComponentType.JAVAFX) javaFXalert().showAndWait();
     }
 
 
-
+    private Alert javaFXalert(){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Invalid Input");
+        alert.setHeaderText("Please correct the following error(s)");
+        alert.setContentText(generateErrorList());
+        return alert;
+    }
 
 
 }

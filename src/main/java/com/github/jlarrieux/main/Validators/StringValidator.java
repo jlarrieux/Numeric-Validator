@@ -10,7 +10,7 @@ public class StringValidator extends AbstractValidator {
     private int numberOfCharacterMin, numberOfCharacterMax;
 
     @Override
-    public boolean validate(String text) {
+    public boolean isValid(String text) {
         return isNotEmpty(text);
     }
 
