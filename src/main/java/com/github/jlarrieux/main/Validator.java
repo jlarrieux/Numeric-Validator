@@ -23,7 +23,7 @@ import java.util.ArrayList;
 /**
  * Created by jlarrieux on 5/22/2017.
  */
-public class NumericValidator {
+public class Validator {
 
     private  AbstractFactory componentFactory = FactoryProducer.getFactory(FactoryProducer.FactoryType.COMPONENT);
     private  AbstractFactory validatorFactory = FactoryProducer.getFactory(FactoryProducer.FactoryType.VALIDATOR);
@@ -40,7 +40,7 @@ public class NumericValidator {
     }
 
 
-    public boolean validate(JTextField textField, NumericValidator.NumberType type, String componentName){
+    public boolean validate(JTextField textField, Validator.NumberType type, String componentName, Integer... numberOfCharacter){
 
         Swing swing = (Swing)  componentFactory.getComponent(ComponentType.SWING);
         swing.setTextField(textField);
@@ -52,9 +52,9 @@ public class NumericValidator {
     }
 
 
-    public boolean validate(TextField textField, NumericValidator.NumberType type, String componentName){
+    public boolean validate(TextField textField, Validator.NumberType type, String componentName, Integer... numberOfCharacter){
 
-        JavaFX fx = (JavaFX) componentFactory.getComponent(NumericValidator.ComponentType.JAVAFX);
+        JavaFX fx = (JavaFX) componentFactory.getComponent(Validator.ComponentType.JAVAFX);
         fx.setTextField(textField);
         ValidationObject object = new ValidationObject(fx,(AbstractValidator) validatorFactory.getValidator(type));
         boolean result = object.validate();

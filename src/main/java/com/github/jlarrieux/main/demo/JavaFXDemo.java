@@ -2,7 +2,7 @@ package com.github.jlarrieux.main.demo;
 
 
 
-import com.github.jlarrieux.main.NumericValidator;
+import com.github.jlarrieux.main.Validator;
 import com.github.jlarrieux.main.ValidationObject.AbstractComponentValidationObject;
 import com.github.jlarrieux.main.ValidationObject.JavaFXValidationObject;
 import javafx.application.Application;
@@ -53,15 +53,15 @@ public class JavaFXDemo extends Application{
 
 
     private void handleClick() {
-//        NumericValidator validator = new NumericValidator(NumericValidator.NumberType.DOUBLE);
+//        Validator validator = new Validator(Validator.NumberType.DOUBLE);
 //        validator.validate(textField,primaryStage);
 //        System.out.println(validator.getErrorString());
-        NumericValidator validator2 = new NumericValidator();
-//        validator2.validate(textField, NumericValidator.NumberType.DOUBLE, "red");
+        Validator validator2 = new Validator();
+//        validator2.validate(textField, Validator.NumberType.DOUBLE, "red");
 
         ArrayList<AbstractComponentValidationObject> list = new ArrayList<>();
-        list.add(new JavaFXValidationObject(textField,"text1", NumericValidator.NumberType.DOUBLE));
-        list.add(new JavaFXValidationObject(textField2, "text2", NumericValidator.NumberType.INTEGER));
+        list.add(new JavaFXValidationObject(textField,"text1", Validator.NumberType.DOUBLE));
+        list.add(new JavaFXValidationObject(textField2, "text2", Validator.NumberType.INTEGER));
         validator2.validate(list);
     }
 

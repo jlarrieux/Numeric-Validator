@@ -2,7 +2,7 @@ package com.github.jlarrieux.main.ValidationObject;
 
 
 
-import com.github.jlarrieux.main.NumericValidator;
+import com.github.jlarrieux.main.Validator;
 import javafx.scene.control.TextField;
 
 
@@ -13,7 +13,7 @@ import javafx.scene.control.TextField;
 public class JavaFXValidationObject extends AbstractComponentValidationObject {
     TextField textField;
 
-    public JavaFXValidationObject(TextField textField, String componentName, NumericValidator.NumberType type){
+    public JavaFXValidationObject(TextField textField, String componentName, Validator.NumberType type){
         this.textField = textField;
         this.setName(componentName);
         this.setType(type);

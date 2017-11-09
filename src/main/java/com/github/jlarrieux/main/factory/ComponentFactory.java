@@ -2,8 +2,7 @@ package com.github.jlarrieux.main.factory;
 
 
 
-import com.github.jlarrieux.main.NumericValidator;
-import com.github.jlarrieux.main.Validators.Validator;
+import com.github.jlarrieux.main.Validator;
 import com.github.jlarrieux.main.components.Component;
 import com.github.jlarrieux.main.components.JavaFX;
 import com.github.jlarrieux.main.components.Swing;
@@ -23,9 +22,9 @@ public class ComponentFactory extends AbstractFactory {
 
 
     @Override
-    public Component getComponent(NumericValidator.ComponentType componentType) {
-        if(componentType == NumericValidator.ComponentType.JAVAFX) return new JavaFX();
-        else if(componentType == NumericValidator.ComponentType.SWING) return new Swing();
+    public Component getComponent(Validator.ComponentType componentType) {
+        if(componentType == Validator.ComponentType.JAVAFX) return new JavaFX();
+        else if(componentType == Validator.ComponentType.SWING) return new Swing();
         return null;
     }
 
@@ -43,7 +42,7 @@ public class ComponentFactory extends AbstractFactory {
 
 
     @Override
-    public Validator getValidator(NumericValidator.NumberType numberType) {
+    public com.github.jlarrieux.main.Validators.Validator getValidator(Validator.NumberType numberType) {
         return null;
     }
 }

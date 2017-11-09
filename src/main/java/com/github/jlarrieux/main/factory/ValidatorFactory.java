@@ -2,11 +2,10 @@ package com.github.jlarrieux.main.factory;
 
 
 
-import com.github.jlarrieux.main.NumericValidator;
+import com.github.jlarrieux.main.Validator;
 import com.github.jlarrieux.main.Validators.DoubleValidator;
 import com.github.jlarrieux.main.Validators.IntegerValidator;
-import com.github.jlarrieux.main.Validators.PlainValidator;
-import com.github.jlarrieux.main.Validators.Validator;
+import com.github.jlarrieux.main.Validators.StringValidator;
 import com.github.jlarrieux.main.components.Component;
 
 
@@ -18,17 +17,17 @@ public class ValidatorFactory extends AbstractFactory {
 
 
     @Override
-    public Component getComponent(NumericValidator.ComponentType componentType) {
+    public Component getComponent(Validator.ComponentType componentType) {
         return null;
     }
 
 
 
     @Override
-    public Validator getValidator(NumericValidator.NumberType numberType) {
-        if(numberType == NumericValidator.NumberType.DOUBLE) return new DoubleValidator();
-        else if(numberType== NumericValidator.NumberType.INTEGER) return new IntegerValidator();
-        else if(numberType== NumericValidator.NumberType.Plain) return new PlainValidator();
+    public com.github.jlarrieux.main.Validators.Validator getValidator(Validator.NumberType numberType) {
+        if(numberType == Validator.NumberType.DOUBLE) return new DoubleValidator();
+        else if(numberType== Validator.NumberType.INTEGER) return new IntegerValidator();
+        else if(numberType== Validator.NumberType.Plain) return new StringValidator();
         return null;
     }
 }

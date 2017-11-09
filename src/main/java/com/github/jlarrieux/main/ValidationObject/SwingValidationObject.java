@@ -2,7 +2,7 @@ package com.github.jlarrieux.main.ValidationObject;
 
 
 
-import com.github.jlarrieux.main.NumericValidator;
+import com.github.jlarrieux.main.Validator;
 
 import javax.swing.*;
 
@@ -16,7 +16,7 @@ public class SwingValidationObject extends AbstractComponentValidationObject {
     JTextField textField;
 
 
-    public SwingValidationObject(JTextField textField, String componentName, NumericValidator.NumberType type){
+    public SwingValidationObject(JTextField textField, String componentName, Validator.NumberType type){
         this.textField = textField;
         this.setName(componentName);
         this.setType(type);

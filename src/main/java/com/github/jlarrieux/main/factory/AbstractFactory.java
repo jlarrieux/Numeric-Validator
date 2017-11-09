@@ -2,8 +2,7 @@ package com.github.jlarrieux.main.factory;
 
 
 
-import com.github.jlarrieux.main.NumericValidator;
-import com.github.jlarrieux.main.Validators.Validator;
+import com.github.jlarrieux.main.Validator;
 import com.github.jlarrieux.main.components.Component;
 
 
@@ -13,7 +12,7 @@ import com.github.jlarrieux.main.components.Component;
  */
 public abstract class AbstractFactory {
 
-    public abstract Component getComponent(NumericValidator.ComponentType componentType);
-    public abstract Validator getValidator(NumericValidator.NumberType numberType);
+    public abstract Component getComponent(Validator.ComponentType componentType);
+    public abstract com.github.jlarrieux.main.Validators.Validator getValidator(Validator.NumberType numberType);
 
 }

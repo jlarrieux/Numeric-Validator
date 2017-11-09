@@ -2,7 +2,7 @@ package com.github.jlarrieux.main.ValidationObject;
 
 
 
-import com.github.jlarrieux.main.NumericValidator;
+import com.github.jlarrieux.main.Validator;
 
 
 
@@ -12,7 +12,7 @@ import com.github.jlarrieux.main.NumericValidator;
 public class AbstractComponentValidationObject {
 
     private String name;
-    private NumericValidator.NumberType type;
+    private Validator.NumberType type;
 
 
 
@@ -28,13 +28,13 @@ public class AbstractComponentValidationObject {
 
 
 
-    public NumericValidator.NumberType getType() {
+    public Validator.NumberType getType() {
         return type;
     }
 
 
 
-    protected void setType(NumericValidator.NumberType type) {
+    protected void setType(Validator.NumberType type) {
         this.type = type;
     }
 }

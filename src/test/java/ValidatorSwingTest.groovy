@@ -1,16 +1,16 @@
-import com.github.jlarrieux.main.NumericValidator
+import com.github.jlarrieux.main.Validator
 import spock.lang.Specification
 
 import javax.swing.*
 /**
  * Created by jlarrieux on 5/11/2017.
  */
-class NumericValidatorSwingTest extends Specification{
+class ValidatorSwingTest extends Specification{
 
-    NumericValidator val;
+    Validator val;
 
     def setup(){
-        val = new NumericValidator()
+        val = new Validator()
         val.setAllowPopUp( false);
     }
 
@@ -21,7 +21,7 @@ class NumericValidatorSwingTest extends Specification{
 
         expect:
         textField.setText(String.valueOf(a))
-        b == val.validate(textField, NumericValidator.NumberType.INTEGER, "B")
+        b == val.validate(textField, Validator.NumberType.INTEGER, "B")
 
         where:
         a <<[1,2.0,'a',null,-1]
@@ -37,7 +37,7 @@ class NumericValidatorSwingTest extends Specification{
 
         expect:
         textField.setText(String.valueOf(a))
-        b== val.validate(textField, NumericValidator.NumberType.DOUBLE, "a")
+        b== val.validate(textField, Validator.NumberType.DOUBLE, "a")
 
         where:
         a <<[1,2.0,'a',null,-1]

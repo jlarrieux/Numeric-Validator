@@ -1,15 +1,15 @@
-import com.github.jlarrieux.main.NumericValidator
+import com.github.jlarrieux.main.Validator
 import spock.lang.Specification
 /**
  * Created by jlarrieux on 5/19/2017.
  */
-class NumericValidatorJavaFxTest extends Specification{
+class ValidatorJavaFxTest extends Specification{
 
-    NumericValidator val;
+    Validator val;
 
 
     def setup(){
-        val = new NumericValidator(NumericValidator.NumberType.INTEGER)
+        val = new Validator(Validator.NumberType.INTEGER)
         val.setAllowPopUp(false);
     }
 

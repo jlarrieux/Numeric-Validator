@@ -2,7 +2,7 @@ package com.github.jlarrieux.main.demo;
 
 
 
-import com.github.jlarrieux.main.NumericValidator;
+import com.github.jlarrieux.main.Validator;
 import com.github.jlarrieux.main.ValidationObject.AbstractComponentValidationObject;
 import com.github.jlarrieux.main.ValidationObject.SwingValidationObject;
 
@@ -65,16 +65,16 @@ public class SwingDemo extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-//        NumericValidator validator = new NumericValidator(NumericValidator.NumberType.DOUBLE);
+//        Validator validator = new Validator(Validator.NumberType.DOUBLE);
 //        validator.validate(textField);
 
 
-        NumericValidator val2 = new NumericValidator();
-//        val2.validate(textField, NumericValidator.NumberType.DOUBLE,"text");
+        Validator val2 = new Validator();
+//        val2.validate(textField, Validator.NumberType.DOUBLE,"text");
         ArrayList<AbstractComponentValidationObject> validationObjects = new ArrayList<>();
 
-        validationObjects.add(new SwingValidationObject(textField, "textfield1", NumericValidator.NumberType.DOUBLE));
-        validationObjects.add(new SwingValidationObject(textField2,"textfield2", NumericValidator.NumberType.INTEGER));
+        validationObjects.add(new SwingValidationObject(textField, "textfield1", Validator.NumberType.DOUBLE));
+        validationObjects.add(new SwingValidationObject(textField2,"textfield2", Validator.NumberType.INTEGER));
         val2.validate(validationObjects);
 
     }
